@@ -18,9 +18,9 @@ Accessing regular page URL will produce a JSON output, so you can process that u
   "t": "Page Title | Site Title",
   "generator": "Mecha 2.2.1",
   "url": {
-    "next": "http://127.0.0.1/mecha/article/page-name",
+    "next": "http://127.0.0.1/article/page-name-2",
     "prev": null,
-    "self": "http://127.0.0.1/mecha/article/page-name"
+    "self": "http://127.0.0.1/article/page-name"
   },
   "title": "Site Title",
   "description": "Site description.",
@@ -38,7 +38,7 @@ Accessing regular page URL will produce a JSON output, so you can process that u
     "description": "Page description.",
     "time": "2020-01-01 00:39:56",
     "link": null,
-    "url": "http://127.0.0.1/mecha/article/page-name",
+    "url": "http://127.0.0.1/article/page-name",
     "x": "page"
   }
 }
