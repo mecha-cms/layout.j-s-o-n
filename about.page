@@ -1,9 +1,9 @@
 ---
-title: Layout-Less
+title: JSON
 description: A layout system that outputs JSON data instead of HTML page. Useful for those who want to use Mecha as a headless CMS.
 author: Taufik Nurrohman
 type: Markdown
-version: 1.0.0
+version: 1.1.0
 ...
 
 A headless CMS is a back-end only content management system built from the ground up as a content repository that makes content accessible via a RESTful API for display on any device. The term “headless” comes from the concept of chopping the “head” (the front end, i.e. the website) off the “body” (the back end, i.e. the content repository).
@@ -14,18 +14,10 @@ Accessing regular page URL will produce a JSON output, so you can process that u
 
 ~~~ .json
 {
-  "status": 200,
-  "t": "Page Title | Site Title",
-  "generator": "Mecha 2.2.1",
-  "url": {
-    "next": "http://127.0.0.1/article/page-name-2",
-    "prev": null,
-    "self": "http://127.0.0.1/article/page-name"
-  },
-  "title": "Site Title",
-  "description": "Site description.",
-  "can": { … },
   "are": { … },
+  "can": { … },
+  "description": "Site description.",
+  "generator": "Mecha 2.6.0",
   "has": { … },
   "is": {
     "page": true,
@@ -33,13 +25,21 @@ Accessing regular page URL will produce a JSON output, so you can process that u
   },
   "not": { … },
   "page": {
-    "id": "1577813996",
-    "title": "Page Title",
     "description": "Page description.",
-    "time": "2020-01-01 00:39:56",
+    "id": "1577813996",
     "link": null,
+    "time": "2020-01-01 00:39:56",
+    "title": "Page Title",
     "url": "http://127.0.0.1/article/page-name",
     "x": "page"
+  },
+  "status": 200,
+  "t": "Page Title | Site Title",
+  "title": "Site Title",
+  "url": {
+    "current": "http://127.0.0.1/article/page-name",
+    "next": "http://127.0.0.1/article/page-name-2",
+    "prev": null
   }
 }
 ~~~

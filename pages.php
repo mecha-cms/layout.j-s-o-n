@@ -3,7 +3,7 @@
 
 $a = [];
 
-$props = explode(',', $_GET['pages'] ?? 'id,title,description,time,link,url,x');
+$props = explode(',', $_GET['pages'] ?? 'description,id,link,time,title,url,x');
 
 foreach ($pages as $page) {
     $page_data = [];

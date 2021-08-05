@@ -8,13 +8,13 @@ Lot::type('application/json');
 
 $i = 60 * 60 * 24; // Cache output for a day
 Lot::set(200 === ($status = Lot::status()) && !$err && empty($_GET['cache']) ? [
-    'Cache-Control' => 'max-age=' . $i . ', private',
-    'Expires' => gmdate('D, d M Y H:i:s', time() + $i) . ' GMT',
-    'Pragma' => 'private'
+    'cache-control' => 'max-age=' . $i . ', private',
+    'expires' => gmdate('D, d M Y H:i:s', time() + $i) . ' GMT',
+    'pragma' => 'private'
 ] : [
-    'Cache-Control' => 'max-age=0, must-revalidate, no-cache, no-store',
-    'Expires' => '0',
-    'Pragma' => 'no-cache'
+    'cache-control' => 'max-age=0, must-revalidate, no-cache, no-store',
+    'expires' => '0',
+    'pragma' => 'no-cache'
 ]);
 
 $a = [];
@@ -27,37 +27,37 @@ $c = State::get(null, true);
 
 $site_data = [];
 
-foreach (explode(',', $_GET['site'] ?? 'title,description,can,are,has,is,not') as $k) {
+foreach (explode(',', $_GET['site'] ?? 'are,can,description,has,is,not,title') as $k) {
     // Exclude empty key
     if ("" === trim($k)) {
         continue;
     }
     // Exclude sensitive data
-    if ('.' === $k[0] || '_' === $k[0] || 'token' === $k) {
+    if ('.' === $k[0] || '_' === $k[0] || 'pass' === $k || 'token' === $k) {
         continue;
     }
     $site_data[$k] = o($c[$k] ?? null);
 }
 
 State::set('layout-data', array_replace([
-    // Document status
-    'status' => $status,
     // Notification(s)
     'alert' => o($a),
-    // Document title
-    't' => $t->reverse->join(' | '),
     // Meta
     'generator' => 'Mecha ' . VERSION,
+    // Document status
+    'status' => $status,
+    // Document title
+    't' => $t->reverse->join(' | '),
     'url' => [
+        'current' => $url->current,
         'next' => $pager->next ?? null,
-        'prev' => $pager->prev ?? null,
-        'self' => $url->current
+        'prev' => $pager->prev ?? null
     ]
 ], $site_data));
 
 if (200 === $status) {
     $page_data = [];
-    foreach (explode(',', $_GET['page'] ?? 'id,title,description,time,link,url,x') as $k) {
+    foreach (explode(',', $_GET['page'] ?? 'description,id,link,time,title,url,x') as $k) {
         // Exclude empty key
         if ("" === trim($k)) {
             continue;
@@ -72,7 +72,7 @@ if (200 === $status) {
     State::set('layout-data.page', $page_data);
     if (!empty($c['x']['tag']) && !empty($tag) && !empty($c['is']['tags'])) {
         $tag_data = [];
-        foreach (explode(',', $_GET['tag'] ?? 'id,title,description,time,url,x') as $k) {
+        foreach (explode(',', $_GET['tag'] ?? 'description,id,time,title,url,x') as $k) {
             // Exclude empty key
             if ("" === trim($k)) {
                 continue;
